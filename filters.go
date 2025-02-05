@@ -1,6 +1,8 @@
 package main
 
-import "strings"
+import (
+	"strings"
+)
 
 func filter_1(s string) bool {
 	s_ := strings.Split(s, ">")
@@ -25,7 +27,8 @@ func filter_1(s string) bool {
 		!strings.Contains(s, "//@") &&
 		!strings.Contains(s, ".preventDefault") &&
 		!strings.Contains(s, "function(") &&
-		!strings.Contains(strings.ToLower(s), "jquery") && strings.ToLower(_s) != "youtube" &&
+		!strings.Contains(strings.ToLower(s), "jquery") &&
+		strings.ToLower(_s) != "youtube" &&
 		strings.ToLower(_s) != "google" &&
 		strings.ToLower(_s) != "facebook" &&
 		strings.ToLower(_s) != "instagram" &&
@@ -45,6 +48,14 @@ func filter_1(s string) bool {
 		strings.Count(_s, ";") < 6
 }
 
+func filter_nimbus_1(formed []string) bool {
+	for _, w := range formed {
+		if len(w) < 3 || stopsmap[w] || !isMostlyLetters(w) {
+			return false
+		}
+	}
+	return true
+}
 func fixback(s string) string {
 	chars := "abcdefghijklmnopqrstuvwxyz"
 	if len(s) > 1 {
